@@ -18,9 +18,11 @@ namespace BudgetApp.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult HomePage(UserModel user)
         {
-            return View();
+            ViewData["UserName"] = user.Name; 
+            return View(); 
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
