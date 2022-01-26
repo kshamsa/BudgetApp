@@ -7,14 +7,19 @@
     <h1 class="display-4">Welcome to my amazing budget app</h1>
 
     <form method="post" asp-action="HomePage">
-        <label>Username:</label>
+        <label>Email:</label>
         <br/>
-        <input asp-for="Name" />
+        <input asp-for="Email" />
         <br/>
         <label>Password</label>
         <br/>
         <input type="password" asp-for="Password"/>
         <br/>
         <input type="submit"/>
+    </form>
+
+    <form method="post" asp-action="CreateAccount">
+        <h3>Dont have an account? Create one:</h3>
+        <input type="submit" />
     </form>
 </div>

@@ -1,0 +1,30 @@
+﻿@model UserModel
+@{
+}
+<h2>Create an account!</h2>
+<h3>@ViewData["ResultMessage"]</h3>
+
+<form method="post" asp-controller="CreateAccount" asp-action="CreateNewAccount">
+    <label>First Name:</label>
+    <br/>
+    <input asp-for="FirstName" />
+    <br/>
+
+    <label>Last Name:</label>
+    <br/>
+    <input asp-for="LastName" />
+    <br/>
+
+    <label>Email:</label>
+    <br/>
+    <input asp-for="Email" />
+    <br/>
+
+    <label>Password</label>
+    <br/>
+    <input type="password" asp-for="Password"/>
+    <br/>
+
+    <input type="submit"/>
+ 
+</form>
