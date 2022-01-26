@@ -1,6 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "HomePage";
 }
+
+<div class="nav-bar">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Budget">My Budget</a>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+
+</div>
+
 
 <h1>HomePage</h1>
 <h2>Hello @ViewData["UserName"]</h2>
