@@ -21,7 +21,7 @@ namespace BudgetApp.Controllers
         [HttpPost]
         public IActionResult HomePage(UserModel user)
         {
-            ViewData["UserName"] = user.Name; 
+            ViewData["UserName"] = user.FirstName; 
             return View(); 
         }
 
