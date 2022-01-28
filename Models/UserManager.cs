@@ -23,5 +23,45 @@ namespace BudgetApp.Models
             }
         }
 
+        public int AddUser(UserModel user)
+        {
+            int returnID = -1; 
+
+            using (NpgsqlCommand cmd = connection.CreateCommand())
+            {
+                cmd.Connection.Open();
+
+                try
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "add_user";
+                    cmd.Parameters.AddWithValue("_first_name", NpgsqlTypes.NpgsqlDbType.Text, user.FirstName);
+                    cmd.Parameters.AddWithValue("_last_name", NpgsqlTypes.NpgsqlDbType.Text, user.LastName);
+                    cmd.Parameters.AddWithValue("_email", NpgsqlTypes.NpgsqlDbType.Text, user.Email);
+                    cmd.Parameters.AddWithValue("_password", NpgsqlTypes.NpgsqlDbType.Text, user.Password);
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            returnID = reader.GetInt32(0);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(System.Environment.NewLine + ex.Message + System.Environment.NewLine);
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    //garuntee that the connection to your database is closed. 
+                    cmd.Connection.Close();
+                }
+            }
+
+            return returnID; 
+        }
     }
 }
