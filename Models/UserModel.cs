@@ -15,5 +15,29 @@
             Password = ""; 
         }
 
+        public bool ValidateUser()
+        {
+            if (FirstName == "")
+            {
+                return false; 
+            }
+
+            if (LastName == "")
+            {
+                return false; 
+            }
+
+            if (Email == "")
+            {
+                return false; 
+            }
+
+            if (Password == "")
+            {
+                return false; 
+            }
+
+            return true;
+        }
     }
 }

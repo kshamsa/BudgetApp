@@ -17,33 +17,26 @@ namespace BudgetApp.Controllers
         {
             string resultMessage = "";
 
-            if(user.FirstName == null)
-            {
-                resultMessage += "Please enter a first name.<br/>"; 
-            }
-
-            if (user.LastName == null)
-            {
-                resultMessage += "Please enter a last name.<br/>";
-            }
-
-            if (user.Email == null)
-            {
-                resultMessage += "Please enter an email.<br/>";
-            }
-
-            if (user.Password == null)
-            {
-                resultMessage += "Please enter a password.<br/>"; 
-            }
-
             ViewData["ResultMessage"] = resultMessage;
 
-            UserManager userManager = new UserManager();
-            int userID = userManager.AddUser(user);
+            //If all entries are filled in correctly, proceed.
+            if(user.ValidateUser())
+            {
+                UserManager userManager = new UserManager();
 
-            ViewData["UserID"] = userID.ToString(); 
-            return View("~/Views/Shared/CreateAccount.cshtml"); 
+                //Check if user already exists by checking their email.
+                if(userManager.CheckUser(user.Email) == false)
+                {
+                    int userID = userManager.AddUser(user);
+                    ViewData["UserID"] = userID.ToString();
+                }
+                else
+                {
+                    ViewData["ResultMessage"] = "User account already exists."; 
+                }
+            }
+            
+            return View("~/Views/Shared/CreateAccount.cshtml");
         }
     }
 }

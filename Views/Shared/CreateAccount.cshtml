@@ -5,27 +5,76 @@
 <h3>@Html.Raw(ViewData["ResultMessage"])</h3>
 <h3>@ViewData["UserID"]</h3>
 
-<form method="post" asp-controller="CreateAccount" asp-action="CreateNewAccount">
+<form id="formCreateAccount" method="post" asp-controller="CreateAccount" asp-action="CreateNewAccount">
     <label>First Name:</label>
     <br/>
-    <input asp-for="FirstName" />
+    <input id="txtFirstName" asp-for="FirstName" />
+    <br/>
+    <label id="errorFirstName"></label>
     <br/>
 
     <label>Last Name:</label>
     <br/>
-    <input asp-for="LastName" />
+    <input id="txtLastName" asp-for="LastName" />
+    <br/>
+    <label id="errorLastName"></label>
     <br/>
 
     <label>Email:</label>
     <br/>
-    <input asp-for="Email" />
+    <input id="txtEmail" asp-for="Email" />
+    <br/>
+    <label id="errorEmail"></label>
     <br/>
 
     <label>Password</label>
     <br/>
-    <input type="password" asp-for="Password"/>
+    <input id="txtPassword" type="password" asp-for="Password"/>
+    <br/>
+    <label id="errorPassword"></label>
     <br/>
 
-    <input type="submit"/>
+    <input id="btnCreateAccount" type="submit"/>
  
 </form>
+
+<script>
+
+    $("document").ready(function() {
+
+        function PreventFormSubmssion() {
+            if($("#txtFirstName").val().length === 0 ||
+                $("#txtLastName").val().length === 0 ||
+                $("#txtEmail").val().length === 0    ||
+                $("#txtPassword").val().length === 0) {
+                    return true; 
+                }
+            return false; 
+        }
+
+        function LoadFormErrors() {
+            if($("#txtFirstName").val().length === 0) {
+                $("#errorFirstName").text("Please enter your first name."); 
+            }
+
+            if($("#txtLastName").val().length === 0) {
+                $("#errorLastName").text("Please enter your last name."); 
+            }
+
+            if($("#txtEmail").val().length === 0) {
+                $("#errorEmail").text("Please enter your email."); 
+            }
+
+            if($("#txtPassword").val().length === 0) {
+                $("#errorPassword").text("Please enter your password."); 
+            }
+        }
+
+        $("form").submit(function(e) {
+            if(PreventFormSubmssion()) {
+                e.preventDefault(); 
+                LoadFormErrors(); 
+            }
+        }); 
+    });
+</script>
