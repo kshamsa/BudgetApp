@@ -112,6 +112,57 @@ namespace BudgetApp.Models
                 return true; 
             }
         }
+
+        public UserModel GetUser(int userID)
+        {
+            int returnedId = -1;
+
+            using (NpgsqlCommand cmd = connection.CreateCommand())
+            {
+                cmd.Connection.Open();
+
+                try
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "get_user";
+                    cmd.Parameters.AddWithValue("_user_ID", NpgsqlTypes.NpgsqlDbType.Integer, userID);
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            //Normally you would check for the column name, 
+                            //but in PostgreSQL you would when a function is called
+                            //the function name is what is returned
+                            int userIdIndex = reader.GetOrdinal("get_user");
+                            returnedId = reader.GetInt32(userIdIndex);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(System.Environment.NewLine + ex.Message + System.Environment.NewLine);
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    //garuntee that the connection to your database is closed. 
+                    cmd.Connection.Close();
+                }
+            }
+
+            if (returnedId == -1)
+            {
+                //return false;
+            }
+            else
+            {
+                //return true;
+            }
+
+            return new UserModel(); 
+        }
     }
 }
 
