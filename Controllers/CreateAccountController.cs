@@ -29,13 +29,16 @@ namespace BudgetApp.Controllers
                 {
                     int userID = userManager.AddUser(user);
                     ViewData["UserID"] = userID.ToString();
+                    return View("~/Views/Home/HomePage.cshtml");
                 }
                 else
                 {
-                    ViewData["ResultMessage"] = "User account already exists."; 
+                    ViewData["ResultMessage"] = "User account already exists.";
+                    return View("~/Views/Shared/CreateAccount.cshtml");
+
                 }
             }
-            
+
             return View("~/Views/Shared/CreateAccount.cshtml");
         }
     }

@@ -41,39 +41,34 @@
 <script>
 
     $("document").ready(function() {
-
-        function PreventFormSubmssion() {
+        function ValidateForm() {
             if($("#txtFirstName").val().length === 0 ||
                 $("#txtLastName").val().length === 0 ||
                 $("#txtEmail").val().length === 0    ||
                 $("#txtPassword").val().length === 0) {
+                    if($("#txtFirstName").val().length === 0) {
+                        $("#errorFirstName").text("Please enter your first name."); 
+                    }
+
+                    if($("#txtLastName").val().length === 0) {
+                        $("#errorLastName").text("Please enter your last name."); 
+                    }
+
+                    if($("#txtEmail").val().length === 0) {
+                        $("#errorEmail").text("Please enter your email."); 
+                    }
+
+                    if($("#txtPassword").val().length === 0) {
+                        $("#errorPassword").text("Please enter your password."); 
+                    }
                     return true; 
-                }
+                } 
             return false; 
         }
 
-        function LoadFormErrors() {
-            if($("#txtFirstName").val().length === 0) {
-                $("#errorFirstName").text("Please enter your first name."); 
-            }
-
-            if($("#txtLastName").val().length === 0) {
-                $("#errorLastName").text("Please enter your last name."); 
-            }
-
-            if($("#txtEmail").val().length === 0) {
-                $("#errorEmail").text("Please enter your email."); 
-            }
-
-            if($("#txtPassword").val().length === 0) {
-                $("#errorPassword").text("Please enter your password."); 
-            }
-        }
-
         $("form").submit(function(e) {
-            if(PreventFormSubmssion()) {
+            if(ValidateForm()) {
                 e.preventDefault(); 
-                LoadFormErrors(); 
             }
         }); 
     });
