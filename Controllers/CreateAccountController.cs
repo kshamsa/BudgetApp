@@ -7,16 +7,39 @@ namespace BudgetApp.Controllers
     {
         public IActionResult Index()
         {
-            ViewData["ResultMessage"] = ""; 
+            ViewData["ResultMessage"] = "";
+            ViewData["UserID"] = "";
             return View();
         }
 
         [HttpPost]
         public IActionResult CreateNewAccount(UserModel user)
         {
-            ViewData["ResultMessage"] = "Success";
+            string resultMessage = "";
 
-            return View("~/Views/Shared/CreateAccount.cshtml"); 
+            ViewData["ResultMessage"] = resultMessage;
+
+            //If all entries are filled in correctly, proceed.
+            if(user.ValidateUser())
+            {
+                UserManager userManager = new UserManager();
+
+                //Check if user already exists by checking their email.
+                if(userManager.CheckUser(user.Email) == false)
+                {
+                    int userID = userManager.AddUser(user);
+                    ViewData["UserID"] = userID.ToString();
+                    return View("~/Views/Home/HomePage.cshtml");
+                }
+                else
+                {
+                    ViewData["ResultMessage"] = "User account already exists.";
+                    return View("~/Views/Shared/CreateAccount.cshtml");
+
+                }
+            }
+
+            return View("~/Views/Shared/CreateAccount.cshtml");
         }
     }
 }
