@@ -1,5 +1,8 @@
 ﻿@model UserModel
 @{
+    int UserID = (int)ViewData["UserID"];
+    UserManager oUserManager = new UserManager(); 
+    UserModel oUser = oUserManager.GetUser(UserID); 
 }
 
 <div class="nav-bar">
@@ -10,5 +13,5 @@
 
 
 <h1>HomePage</h1>
-<h2>UserID @ViewData["UserID"]</h2>
+<h2>Hello @oUser.FirstName</h2>
 
