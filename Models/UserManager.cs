@@ -135,8 +135,21 @@ namespace BudgetApp.Models
                             //Normally you would check for the column name, 
                             //but in PostgreSQL you would when a function is called
                             //the function name is what is returned
-                            int userIdIndex = reader.GetOrdinal("get_user");
-                            returnedId = reader.GetInt32(userIdIndex);
+                            UserModel oUser = new UserModel();
+
+                            int ordID = reader.GetOrdinal("user_ID");
+                            int ordFirstName = reader.GetOrdinal("first_name");
+                            int ordLastName = reader.GetOrdinal("last_name");
+                            int ordEmail = reader.GetOrdinal("email");
+                            int ordPassword = reader.GetOrdinal("password");
+
+                            oUser.Id = reader.GetInt32(ordID);
+                            oUser.FirstName = reader.GetString(ordFirstName);
+                            oUser.LastName = reader.GetString(ordLastName);
+                            oUser.Email = reader.GetString(ordEmail);
+                            oUser.Password = reader.GetString(ordPassword);
+
+                            return oUser;
                         }
                     }
                 }
@@ -150,15 +163,6 @@ namespace BudgetApp.Models
                     //garuntee that the connection to your database is closed. 
                     cmd.Connection.Close();
                 }
-            }
-
-            if (returnedId == -1)
-            {
-                //return false;
-            }
-            else
-            {
-                //return true;
             }
 
             return new UserModel(); 
