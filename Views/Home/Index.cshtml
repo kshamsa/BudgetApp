@@ -9,17 +9,47 @@
     <form method="post" asp-action="HomePage">
         <label>Email:</label>
         <br/>
-        <input asp-for="Email" />
+        <input id="txtEmail" asp-for="Email" />
         <br/>
+        <label id=errorEmail></label>
+        <br/>
+
         <label>Password</label>
         <br/>
-        <input type="password" asp-for="Password"/>
+        <input id="txtPassword" type="password" asp-for="Password"/>
         <br/>
-        <input type="submit"/>
+        <label id="errorPassword"></label>
+        <br/>
+
+        <input type="submit" value="login"/>
     </form>
 
     <form method="post" asp-action="CreateAccount">
         <h3>Dont have an account? Create one:</h3>
-        <input type="submit" />
+        <input type="submit" value="create account"/>
     </form>
 </div>
+
+<script>
+    $("document").ready(function() {
+        function ValidateForm() {
+            if($("#txtEmail").val().length === 0 || $("#txtPassword").val().length === 0) {
+                    if($("#txtEmail").val().length === 0) {
+                        $("#errorEmail").text("Please enter your email."); 
+                    }
+
+                    if($("#txtPassword").val().length === 0) {
+                        $("#errorPassword").text("Please enter your password."); 
+                    }
+                    return false; 
+                } 
+            return true; 
+        }
+
+        $("form").submit(function(e) {
+            if(ValidateForm() == false) {
+                e.preventDefault(); 
+            }
+        }); 
+    });
+</script>
