@@ -23,7 +23,7 @@ namespace BudgetApp.Models
             }
         }
 
-        public int AddUser(UserModel user)
+        public int AddUser(UserModel _User)
         {
             int returnID = -1; 
 
@@ -35,10 +35,10 @@ namespace BudgetApp.Models
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "add_user";
-                    cmd.Parameters.AddWithValue("_first_name", NpgsqlTypes.NpgsqlDbType.Text, user.FirstName);
-                    cmd.Parameters.AddWithValue("_last_name", NpgsqlTypes.NpgsqlDbType.Text, user.LastName);
-                    cmd.Parameters.AddWithValue("_email", NpgsqlTypes.NpgsqlDbType.Text, user.Email);
-                    cmd.Parameters.AddWithValue("_password", NpgsqlTypes.NpgsqlDbType.Text, user.Password);
+                    cmd.Parameters.AddWithValue("_first_name", NpgsqlTypes.NpgsqlDbType.Text, _User.FirstName);
+                    cmd.Parameters.AddWithValue("_last_name", NpgsqlTypes.NpgsqlDbType.Text, _User.LastName);
+                    cmd.Parameters.AddWithValue("_email", NpgsqlTypes.NpgsqlDbType.Text, _User.Email);
+                    cmd.Parameters.AddWithValue("_password", NpgsqlTypes.NpgsqlDbType.Text, _User.Password);
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.HasRows)
@@ -64,7 +64,7 @@ namespace BudgetApp.Models
             return returnID; 
         }
 
-        public bool CheckUser(string email)
+        public bool CheckUser(string _Email)
         {
             int returnedId = -1; 
 
@@ -76,7 +76,7 @@ namespace BudgetApp.Models
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "check_user";
-                    cmd.Parameters.AddWithValue("_email", NpgsqlTypes.NpgsqlDbType.Text, email);
+                    cmd.Parameters.AddWithValue("_email", NpgsqlTypes.NpgsqlDbType.Text, _Email);
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.HasRows)
@@ -113,7 +113,7 @@ namespace BudgetApp.Models
             }
         }
 
-        public UserModel GetUser(int userID)
+        public UserModel GetUser(int _UserId)
         {
             int returnedId = -1;
 
@@ -125,7 +125,7 @@ namespace BudgetApp.Models
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "get_user";
-                    cmd.Parameters.AddWithValue("_user_ID", NpgsqlTypes.NpgsqlDbType.Integer, userID);
+                    cmd.Parameters.AddWithValue("_user_ID", NpgsqlTypes.NpgsqlDbType.Integer, _UserId);
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.HasRows)
@@ -162,6 +162,57 @@ namespace BudgetApp.Models
             }
 
             return new UserModel(); 
+        }
+
+        public UserModel LoginUser(UserModel _User)
+        {
+
+            using (NpgsqlCommand cmd = connection.CreateCommand())
+            {
+                cmd.Connection.Open();
+
+                try
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "login";
+                    cmd.Parameters.AddWithValue("_email", NpgsqlTypes.NpgsqlDbType.Text, _User.Email);
+                    cmd.Parameters.AddWithValue("_password", NpgsqlTypes.NpgsqlDbType.Text, _User.Password);
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            UserModel oUser = new UserModel(); 
+
+                            int ordID =        reader.GetOrdinal("user_ID");
+                            int ordFirstName = reader.GetOrdinal("first_name");
+                            int ordLastName =  reader.GetOrdinal("last_name");
+                            int ordEmail =     reader.GetOrdinal("email");
+                            int ordPassword =  reader.GetOrdinal("password");
+
+                            oUser.Id =        reader.GetInt32(ordID); 
+                            oUser.FirstName = reader.GetString(ordFirstName);
+                            oUser.LastName =  reader.GetString(ordLastName);
+                            oUser.Email =     reader.GetString(ordEmail);
+                            oUser.Password =  reader.GetString(ordPassword);
+
+                            return oUser; 
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(System.Environment.NewLine + ex.Message + System.Environment.NewLine);
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    cmd.Connection.Close();
+                }
+            }
+
+            return new UserModel();
         }
     }
 }

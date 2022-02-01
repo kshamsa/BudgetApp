@@ -19,9 +19,11 @@ namespace BudgetApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult HomePage(UserModel user)
+        public IActionResult HomePage(UserModel _User)
         {
-            ViewData["UserID"] = 14; 
+            UserManager oUserManager = new UserManager();
+            
+            ViewData["UserID"] = oUserManager.LoginUser(_User).Id;
             return View(); 
         }
 
