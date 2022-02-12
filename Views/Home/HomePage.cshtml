@@ -1,8 +1,8 @@
 ﻿@model UserModel
 @{
     int UserID = (int)ViewData["UserID"];
-    UserManager oUserManager = new UserManager(); 
-    UserModel oUser = oUserManager.GetUser(UserID); 
+    UserManager oUserManager = new UserManager();
+    UserModel oUser = oUserManager.GetUser(UserID);
 }
 
 <div class="nav-bar">
@@ -11,7 +11,13 @@
 
 </div>
 
+<div class="container">
+    <div class="row border page-section">
+        <div class="col-sm">
+            <h1>HomePage</h1>
+            <h2>Hello @oUser.FirstName</h2>
+        </div>
+    </div>
+</div>
 
-<h1>HomePage</h1>
-<h2>Hello @oUser.FirstName</h2>
 
