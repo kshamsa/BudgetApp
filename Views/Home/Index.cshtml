@@ -3,31 +3,43 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div>
-    <h1 class="display-4">Welcome to my amazing budget app</h1>
+<div class="container">
+    <div class="row border page-section">
+        <div class="col-sm">
+            <h1 class="display-4">Welcome to my amazing budget app</h1>
 
-    <form method="post" asp-action="HomePage">
-        <label>Email:</label>
-        <br/>
-        <input id="txtEmail" asp-for="Email" />
-        <br/>
-        <label id=errorEmail></label>
-        <br/>
+            <form method="post" asp-action="HomePage">
+                <label>Email:</label>
+                <br />
+                <input id="txtEmail" asp-for="Email" />
+                <br />
+                <label id=errorEmail></label>
+                <br />
 
-        <label>Password</label>
-        <br/>
-        <input id="txtPassword" type="password" asp-for="Password"/>
-        <br/>
-        <label id="errorPassword"></label>
-        <br/>
+                <label>Password</label>
+                <br />
+                <input id="txtPassword" type="password" asp-for="Password" />
+                <br />
+                <label id="errorPassword"></label>
+                <br />
 
-        <input type="submit" value="login"/>
-    </form>
+                <input type="submit" class="btn btn-primary breathing-room" value="login" />
+            </form>
+        </div>
+        <br/>
+    </div>
 
-    <form method="post" asp-action="CreateAccount">
-        <h3>Dont have an account? Create one:</h3>
-        <input type="submit" value="create account"/>
-    </form>
+    <div class="row border page-section">
+        <div class="col-sm">
+
+            <form method="post" asp-action="CreateAccount">
+                <h3 class="breathing-room">
+                    Dont have an account? Create one:
+                    <input type="submit" class="btn btn-dark" value="create account" />
+                </h3>
+            </form>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -35,21 +47,21 @@
         function ValidateForm() {
             if($("#txtEmail").val().length === 0 || $("#txtPassword").val().length === 0) {
                     if($("#txtEmail").val().length === 0) {
-                        $("#errorEmail").text("Please enter your email."); 
+                        $("#errorEmail").text("Please enter your email.");
                     }
 
                     if($("#txtPassword").val().length === 0) {
-                        $("#errorPassword").text("Please enter your password."); 
+                        $("#errorPassword").text("Please enter your password.");
                     }
-                    return false; 
-                } 
-            return true; 
+                    return false;
+                }
+            return true;
         }
 
         $("form").submit(function(e) {
             if(ValidateForm() == false) {
-                e.preventDefault(); 
+                e.preventDefault();
             }
-        }); 
+        });
     });
 </script>

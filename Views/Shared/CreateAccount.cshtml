@@ -5,38 +5,44 @@
 <h3>@Html.Raw(ViewData["ResultMessage"])</h3>
 <h3>@ViewData["UserID"]</h3>
 
-<form id="formCreateAccount" method="post" asp-controller="CreateAccount" asp-action="CreateNewAccount">
-    <label>First Name:</label>
-    <br/>
-    <input id="txtFirstName" asp-for="FirstName" />
-    <br/>
-    <label id="errorFirstName"></label>
-    <br/>
+<div class="container">
+    <div class="row border page-section">
+        <div class="col-sm">
+            <form id="formCreateAccount" method="post" asp-controller="CreateAccount" asp-action="CreateNewAccount">
+                <label>First Name:</label>
+                <br />
+                <input id="txtFirstName" asp-for="FirstName" />
+                <br />
+                <label id="errorFirstName"></label>
+                <br />
 
-    <label>Last Name:</label>
-    <br/>
-    <input id="txtLastName" asp-for="LastName" />
-    <br/>
-    <label id="errorLastName"></label>
-    <br/>
+                <label>Last Name:</label>
+                <br />
+                <input id="txtLastName" asp-for="LastName" />
+                <br />
+                <label id="errorLastName"></label>
+                <br />
 
-    <label>Email:</label>
-    <br/>
-    <input id="txtEmail" asp-for="Email" />
-    <br/>
-    <label id="errorEmail"></label>
-    <br/>
+                <label>Email:</label>
+                <br />
+                <input id="txtEmail" asp-for="Email" />
+                <br />
+                <label id="errorEmail"></label>
+                <br />
 
-    <label>Password</label>
-    <br/>
-    <input id="txtPassword" type="password" asp-for="Password"/>
-    <br/>
-    <label id="errorPassword"></label>
-    <br/>
+                <label>Password</label>
+                <br />
+                <input id="txtPassword" type="password" asp-for="Password" />
+                <br />
+                <label id="errorPassword"></label>
+                <br />
 
-    <input id="btnCreateAccount" type="submit"/>
- 
-</form>
+                <input id="btnCreateAccount" class="btn btn-primary" type="submit" />
+
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
     $("document").ready(function() {
@@ -46,29 +52,29 @@
                 $("#txtEmail").val().length === 0    ||
                 $("#txtPassword").val().length === 0) {
                     if($("#txtFirstName").val().length === 0) {
-                        $("#errorFirstName").text("Please enter your first name."); 
+                        $("#errorFirstName").text("Please enter your first name.");
                     }
 
                     if($("#txtLastName").val().length === 0) {
-                        $("#errorLastName").text("Please enter your last name."); 
+                        $("#errorLastName").text("Please enter your last name.");
                     }
 
                     if($("#txtEmail").val().length === 0) {
-                        $("#errorEmail").text("Please enter your email."); 
+                        $("#errorEmail").text("Please enter your email.");
                     }
 
                     if($("#txtPassword").val().length === 0) {
-                        $("#errorPassword").text("Please enter your password."); 
+                        $("#errorPassword").text("Please enter your password.");
                     }
-                    return true; 
-                } 
-            return false; 
+                    return true;
+                }
+            return false;
         }
 
         $("form").submit(function(e) {
             if(ValidateForm()) {
-                e.preventDefault(); 
+                e.preventDefault();
             }
-        }); 
+        });
     });
 </script>
