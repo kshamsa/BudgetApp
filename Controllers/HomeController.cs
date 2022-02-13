@@ -22,9 +22,9 @@ namespace BudgetApp.Controllers
         public IActionResult HomePage(UserModel _User)
         {
             UserManager oUserManager = new UserManager();
-            
+
             ViewData["UserID"] = oUserManager.LoginUser(_User).Id;
-            return View(); 
+            return View();
         }
 
         [HttpPost]
