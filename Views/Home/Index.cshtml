@@ -8,7 +8,7 @@
         <div class="col-sm">
             <h1 class="display-4">Welcome to my amazing budget app</h1>
 
-            <form method="post" asp-action="HomePage">
+            <form method="post" id="form_login" asp-action="HomePage">
                 <label>Email:</label>
                 <br />
                 <input id="txtEmail" asp-for="Email" />
@@ -32,7 +32,7 @@
     <div class="row border page-section">
         <div class="col-sm">
 
-            <form method="post" asp-action="CreateAccount">
+            <form method="post" id="form_create_account" asp-action="CreateAccount">
                 <h3 class="breathing-room">
                     Dont have an account? Create one:
                     <input type="submit" class="btn btn-dark" value="create account" />
@@ -59,8 +59,11 @@
         }
 
         $("form").submit(function(e) {
-            if(ValidateForm() == false) {
-                e.preventDefault();
+            if(e.currentTarget.id == "form_login") {
+
+                if(ValidateForm() == false) {
+                    e.preventDefault();
+                }
             }
         });
     });
