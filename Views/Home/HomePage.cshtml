@@ -1,23 +1,25 @@
 ﻿@model UserModel
 @{
-    int UserID = (int)ViewData["UserID"];
+    int UserID = int.Parse(ViewData["UserID"].ToString());
     UserManager oUserManager = new UserManager();
     UserModel oUser = oUserManager.GetUser(UserID);
 }
 
-<div class="nav-bar">
-    <a class="nav-link text-dark" asp-area="" asp-controller="Budget" asp-action="Budget">My Budgets</a>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
-
-</div>
-
 <div class="container">
-    <div class="row border page-section">
-        <div class="col-sm">
-            <h1>HomePage</h1>
-            <h2>Hello @oUser.FirstName</h2>
+    <div class="row">
+        <div class="col-6">
+            <div class="border page-section">
+                <h2>Hello @oUser.FirstName</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="nav-bar page-sub-section">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Budget" asp-action="Budget">My Budgets</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+            </div>
         </div>
     </div>
 </div>
-
-
