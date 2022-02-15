@@ -56,18 +56,31 @@
                     if($("#txtFirstName").val().length === 0) {
                         $("#errorFirstName").text("Please enter your first name.");
                     }
+                    else {
+                        $("#errorFirstName").text("");
+                    }
 
                     if($("#txtLastName").val().length === 0) {
                         $("#errorLastName").text("Please enter your last name.");
+                    }
+                    else {
+                        $("#errorLastName").text("");
                     }
 
                     if($("#txtEmail").val().length === 0) {
                         $("#errorEmail").text("Please enter your email.");
                     }
+                    else {
+                        $("#errorEmail").text("");
+                    }
 
                     if($("#txtPassword").val().length === 0) {
                         $("#errorPassword").text("Please enter your password.");
                     }
+                    else {
+                        $("#errorPassword").text("");
+                    }
+
                     return true;
                 }
             return false;
