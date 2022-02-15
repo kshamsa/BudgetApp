@@ -2,12 +2,11 @@
 @{
 }
 <h2>Create an account!</h2>
-<h3>@Html.Raw(ViewData["ResultMessage"])</h3>
-<h3>@ViewData["UserID"]</h3>
 
 <div class="container">
     <div class="row">
         <div class="col-6">
+            <h3 class="alert-danger">@Html.Raw(ViewData["ResultMessage"])</h3>
             <div class="border page-section">
                 <form id="formCreateAccount" method="post" asp-controller="CreateAccount" asp-action="CreateNewAccount">
                     <label>First Name:</label>
