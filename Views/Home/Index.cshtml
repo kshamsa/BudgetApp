@@ -4,40 +4,40 @@
 }
 
 <div class="container">
-    <div class="row border page-section">
-        <div class="col-sm">
-            <h1 class="display-4">Welcome to my amazing budget app</h1>
+    <div class="row">
+        <div class="col-6">
+            <div class="border page-section">
+                <h1 class="display-4">Welcome to my amazing budget app</h1>
 
-            <form method="post" id="form_login" asp-action="HomePage">
-                <label>Email:</label>
-                <br />
-                <input id="txtEmail" asp-for="Email" />
-                <br />
-                <label id=errorEmail class="alert-danger"></label>
-                <br />
+                <form method="post" id="form_login" asp-action="HomePage">
+                    <label>Email:</label>
+                    <br />
+                    <input id="txtEmail" asp-for="Email" />
+                    <br />
+                    <label id=errorEmail class="alert-danger"></label>
+                    <br />
 
-                <label>Password</label>
-                <br />
-                <input id="txtPassword" type="password" asp-for="Password" />
-                <br />
-                <label id="errorPassword" class="alert-danger"></label>
-                <br />
+                    <label>Password</label>
+                    <br />
+                    <input id="txtPassword" type="password" asp-for="Password" />
+                    <br />
+                    <label id="errorPassword" class="alert-danger"></label>
+                    <br />
 
-                <input type="submit" class="btn btn-primary breathing-room" value="login" />
-            </form>
+                    <input type="submit" class="btn btn-primary breathing-room" value="login" />
+                </form>
+            </div>
         </div>
-        <br/>
-    </div>
 
-    <div class="row border page-section">
-        <div class="col-sm">
-
-            <form method="post" id="form_create_account" asp-action="CreateAccount">
-                <h3 class="breathing-room">
-                    Dont have an account? Create one:
-                    <input type="submit" class="btn btn-dark" value="create account" />
-                </h3>
-            </form>
+        <div class="col-6">
+            <div class="border page-section">
+                <form method="post" id="form_create_account" asp-action="CreateAccount">
+                    <h3 class="breathing-room">
+                        Dont have an account? Create one:
+                        <input type="submit" class="btn btn-dark" value="create account" />
+                    </h3>
+                </form>
+            </div>
         </div>
     </div>
 </div>
