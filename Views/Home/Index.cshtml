@@ -49,10 +49,17 @@
                     if($("#txtEmail").val().length === 0) {
                         $("#errorEmail").text("Please enter your email.");
                     }
+                    else {
+                        $("#errorEmail").text("");
+                    }
 
                     if($("#txtPassword").val().length === 0) {
                         $("#errorPassword").text("Please enter your password.");
                     }
+                    else {
+                        $("#errorPassword").text("");
+                    }
+
                     return false;
                 }
             return true;
